@@ -23,6 +23,7 @@ import 'package:nc_photos/flutter_util.dart' as flutter_util;
 import 'package:nc_photos/k.dart' as k;
 import 'package:nc_photos/object_extension.dart';
 import 'package:nc_photos/or_null.dart';
+import 'package:nc_photos/platform/features.dart' as features;
 import 'package:nc_photos/pref.dart';
 import 'package:nc_photos/share_handler.dart';
 import 'package:nc_photos/snack_bar_manager.dart';
@@ -30,6 +31,7 @@ import 'package:nc_photos/use_case/preprocess_album.dart';
 import 'package:nc_photos/use_case/remove.dart';
 import 'package:nc_photos/use_case/update_album.dart';
 import 'package:nc_photos/use_case/update_album_with_actual_items.dart';
+import 'package:nc_photos/widget/ad.dart';
 import 'package:nc_photos/widget/album_browser_mixin.dart';
 import 'package:nc_photos/widget/fancy_option_picker.dart';
 import 'package:nc_photos/widget/network_thumbnail.dart';
@@ -220,6 +222,13 @@ class _DynamicAlbumBrowserState extends State<DynamicAlbumBrowser>
       child: CustomScrollView(
         slivers: [
           _buildAppBar(context),
+          if (features.isSupportAds)
+            const SliverPadding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              sliver: SliverToBoxAdapter(
+                child: AdBanner(),
+              ),
+            ),
           SliverIgnorePointer(
             ignoring: isEditMode,
             sliver: SliverOpacity(

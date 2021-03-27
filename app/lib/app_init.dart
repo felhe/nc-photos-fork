@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:logging/logging.dart';
 import 'package:nc_photos/debug_util.dart';
@@ -84,6 +85,8 @@ Future<void> init(InitIsolateType isolateType) async {
       }
     }
   }
+
+  await _initAds();
 
   _hasInitedInThisIsolate = true;
 }
@@ -243,6 +246,10 @@ Future<sql.SqliteDb> _createDb(InitIsolateType isolateType) async {
       // service already runs in an isolate
       return sql.SqliteDb();
   }
+}
+
+Future<InitializationStatus> _initAds() {
+  return MobileAds.instance.initialize();
 }
 
 final _log = Logger("app_init");
