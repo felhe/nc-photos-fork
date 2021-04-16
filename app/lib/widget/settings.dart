@@ -178,6 +178,13 @@ class _SettingsState extends State<Settings> {
                 label: L10n.global().settingsMiscellaneousTitle,
                 builder: () => const _MiscSettings(),
               ),
+              _buildSubSettings(
+                context,
+                leading: const Icon(Icons.privacy_tip_outlined),
+                label: L10n.global().settingsPrivacyTitle,
+                description: L10n.global().settingsPrivacyDescription,
+                builder: () => _PrivacySettings(),
+              ),
               if (_enabledExperiments.isNotEmpty)
                 _buildSubSettings(
                   context,
@@ -1677,6 +1684,45 @@ class _DevSettingsState extends State<_DevSettings> {
       ));
       _log.shout("[_runSqlVacuum] Uncaught exception", e, stackTrace);
     }
+  }
+}
+
+class _PrivacySettings extends StatefulWidget {
+  @override
+  createState() => _PrivacySettingsState();
+}
+
+class _PrivacySettingsState extends State<_PrivacySettings> {
+  @override
+  build(BuildContext context) {
+    return Scaffold(
+      body: Builder(
+        builder: (context) => _buildContent(context),
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          pinned: true,
+          title: Text(L10n.global().settingsPrivacyPageTitle),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              ListTile(
+                title: Text(L10n.global().settingsPrivacyPolicyTitle),
+                onTap: () {
+                  launch(k.privacyPolicyUrl);
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 
