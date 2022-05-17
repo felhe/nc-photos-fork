@@ -297,6 +297,22 @@ class Pref {
       value,
       (key, value) => provider.setBool(key, value));
 
+  int? getLastDonationDialogTime() =>
+      provider.getInt(PrefKey.lastDonationDialogTime);
+  int getLastDonationDialogTimeOr(int def) =>
+      getLastDonationDialogTime() ?? def;
+  Future<bool> setLastDonationDialogTime(int value) =>
+      provider.setInt(PrefKey.lastDonationDialogTime, value);
+
+  bool? shouldRemindDonationLater() =>
+      provider.getBool(PrefKey.shouldRemindDonationLater);
+  bool shouldRemindDonationLaterOr([bool def = false]) =>
+      shouldRemindDonationLater() ?? def;
+  Future<bool> setShouldRemindDonationLater(bool value) => _set<bool>(
+      PrefKey.shouldRemindDonationLater,
+      value,
+      (key, value) => provider.setBool(key, value));
+
   Future<bool> _set<T>(PrefKey key, T value,
       Future<bool> Function(PrefKey key, T value) setFn) async {
     if (await setFn(key, value)) {
@@ -613,6 +629,8 @@ enum PrefKey {
   seedColor,
   isVideoPlayerMute,
   isVideoPlayerLoop,
+  lastDonationDialogTime,
+  shouldRemindDonationLater,
 
   // account pref
   isEnableFaceRecognitionApp,
@@ -696,6 +714,10 @@ extension on PrefKey {
         return "isVideoPlayerMute";
       case PrefKey.isVideoPlayerLoop:
         return "isVideoPlayerLoop";
+      case PrefKey.lastDonationDialogTime:
+        return "lastDonationDialogTime";
+      case PrefKey.shouldRemindDonationLater:
+        return "shouldRemindDonationLater";
 
       // account pref
       case PrefKey.isEnableFaceRecognitionApp:
