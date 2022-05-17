@@ -11,6 +11,7 @@ import 'package:nc_photos/di_container.dart';
 import 'package:nc_photos/entity/sqlite_table_extension.dart' as sql;
 import 'package:nc_photos/event/event.dart';
 import 'package:nc_photos/exception_util.dart' as exception_util;
+import 'package:nc_photos/help_utils.dart' as help_util;
 import 'package:nc_photos/k.dart' as k;
 import 'package:nc_photos/language_util.dart' as language_util;
 import 'package:nc_photos/mobile/platform.dart'
@@ -209,6 +210,13 @@ class _SettingsState extends State<Settings> {
                       _isShowDevSettings = true;
                     });
                   }
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.coffee_outlined),
+                title: Text(L10n.global().donationTitle),
+                onTap: () {
+                  launch(help_util.donateUrl);
                 },
               ),
               ListTile(
