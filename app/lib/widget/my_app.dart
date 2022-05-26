@@ -42,6 +42,7 @@ import 'package:nc_photos/widget/splash.dart';
 import 'package:nc_photos/widget/tag_browser.dart';
 import 'package:nc_photos/widget/trashbin_browser.dart';
 import 'package:nc_photos/widget/trashbin_viewer.dart';
+import 'package:nc_photos/widget/update_checker.dart';
 import 'package:nc_photos/widget/viewer.dart';
 import 'package:np_codegen/np_codegen.dart';
 
@@ -183,6 +184,7 @@ class _MyAppState extends State<MyApp>
     route ??= _handlePlacesBrowserRoute(settings);
     route ??= _handleResultViewerRoute(settings);
     route ??= _handleImageEnhancerRoute(settings);
+    route ??= _handleUpdateCheckerRoute(settings);
     return route;
   }
 
@@ -653,6 +655,17 @@ class _MyAppState extends State<MyApp>
       }
     } catch (e) {
       _log.severe("[_handleImageEnhancerRoute] Failed while handling route", e);
+    }
+    return null;
+  }
+
+  Route<dynamic>? _handleUpdateCheckerRoute(RouteSettings settings) {
+    try {
+      if (settings.name == UpdateChecker.routeName) {
+        return UpdateChecker.buildRoute();
+      }
+    } catch (e) {
+      _log.severe("[_handleUpdateCheckerRoute] Failed while handling route", e);
     }
     return null;
   }
