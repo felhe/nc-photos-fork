@@ -18,6 +18,7 @@ import 'package:nc_photos/widget/album_share_outlier_browser.dart';
 import 'package:nc_photos/widget/archive_browser.dart';
 import 'package:nc_photos/widget/changelog.dart';
 import 'package:nc_photos/widget/connect.dart';
+import 'package:nc_photos/widget/donation.dart';
 import 'package:nc_photos/widget/dynamic_album_browser.dart';
 import 'package:nc_photos/widget/enhanced_photo_browser.dart';
 import 'package:nc_photos/widget/home.dart';
@@ -183,6 +184,7 @@ class _MyAppState extends State<MyApp>
     route ??= _handlePlacesBrowserRoute(settings);
     route ??= _handleResultViewerRoute(settings);
     route ??= _handleImageEnhancerRoute(settings);
+    route ??= _handleDonationRoute(settings);
     return route;
   }
 
@@ -653,6 +655,17 @@ class _MyAppState extends State<MyApp>
       }
     } catch (e) {
       _log.severe("[_handleImageEnhancerRoute] Failed while handling route", e);
+    }
+    return null;
+  }
+
+  Route<dynamic>? _handleDonationRoute(RouteSettings settings) {
+    try {
+      if (settings.name == Donation.routeName) {
+        return Donation.buildRoute();
+      }
+    } catch (e) {
+      _log.severe("[_handleDonationRoute] Failed while handling route", e);
     }
     return null;
   }

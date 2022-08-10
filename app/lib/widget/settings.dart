@@ -22,6 +22,7 @@ import 'package:nc_photos/pref.dart';
 import 'package:nc_photos/service.dart';
 import 'package:nc_photos/snack_bar_manager.dart';
 import 'package:nc_photos/url_launcher_util.dart';
+import 'package:nc_photos/widget/donation.dart';
 import 'package:nc_photos/widget/fancy_option_picker.dart';
 import 'package:nc_photos/widget/gps_map.dart';
 import 'package:nc_photos/widget/home.dart';
@@ -209,6 +210,13 @@ class _SettingsState extends State<Settings> {
                       _isShowDevSettings = true;
                     });
                   }
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.coffee_outlined),
+                title: Text(L10n.global().donationTitle),
+                onTap: () {
+                  Navigator.of(context).pushNamed(Donation.routeName);
                 },
               ),
               ListTile(
