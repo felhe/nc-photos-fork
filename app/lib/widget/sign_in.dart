@@ -8,12 +8,14 @@ import 'package:nc_photos/account.dart';
 import 'package:nc_photos/app_localizations.dart';
 import 'package:nc_photos/di_container.dart';
 import 'package:nc_photos/entity/sqlite_table_extension.dart' as sql;
+import 'package:nc_photos/help_utils.dart' as help_util;
 import 'package:nc_photos/iterable_extension.dart';
 import 'package:nc_photos/legacy/sign_in.dart' as legacy;
 import 'package:nc_photos/pref.dart';
 import 'package:nc_photos/pref_util.dart' as pref_util;
 import 'package:nc_photos/string_extension.dart';
 import 'package:nc_photos/theme.dart';
+import 'package:nc_photos/url_launcher_util.dart';
 import 'package:nc_photos/widget/connect.dart';
 import 'package:nc_photos/widget/home.dart';
 import 'package:nc_photos/widget/root_picker.dart';
@@ -117,7 +119,12 @@ class _SignInState extends State<SignIn> {
                               .cancelButtonLabel),
                         )
                       else
-                        Container(),
+                        TextButton(
+                          onPressed: () {
+                            launch(help_util.nextcloudProviderUrl);
+                          },
+                          child: const Text("DON'T HAVE ONE?"),
+                        ),
                       ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState?.validate() == true) {
